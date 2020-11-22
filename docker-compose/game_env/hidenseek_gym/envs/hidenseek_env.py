@@ -25,6 +25,7 @@ class HideNSeekEnv(gym.Env):
         self.map_path = config['game']['map']
         self.fps = config['game']['fps']
         self.clock = pygame.time.Clock()
+        self.screen = None
 
         self.dt = self.clock.tick_busy_loop(self.fps)
         self.cfg = config['game']
@@ -43,20 +44,12 @@ class HideNSeekEnv(gym.Env):
         self.players_group.add(self.player_seek)
         self.players_group.add(self.player_hide)
 
-        # temp
-        os.environ["SDL_VIDEODRIVER"] = "dummy"
-        pygame.display.init()
-        self.screen = pygame.display.set_mode(
-            (self.width, self.height), 0, 32)
-        self.screen_lite = self.screen.copy()
+        self.screen_lite = pygame.Surface((self.width, self.height))
         if self.walls_group:
-            self.walls_group.draw(self.screen)
             for wall in walls:
                 wall_p = [(p.x, p.y) for p in wall.get_abs_vertices()]
                 _ = [pygame.draw.polygon(
                     self.screen_lite, (255, 255, 255), wall_p)]
-
-        self.screen_cpy = self.screen.copy()
 
         self.p_hide_cfg = config['hiding']
         self.p_seek_cfg = config['seeker']
@@ -464,7 +457,14 @@ class HideNSeekEnv(gym.Env):
                 pygame.quit()
                 return
 
-            self.screen = self.screen_cpy.copy()
+            if not self.screen:
+                pygame.display.init()
+                self.screen = pygame.display.set_mode(
+                    (self.width, self.height), 0, 32)
+
+            self.screen.fill((0, 0, 0))
+            if self.walls_group:
+                self.walls_group.draw(self.screen)
 
             if self.player_hide and self.player_seek:
                 if self.default_cfg['video']['draw_pov']:
