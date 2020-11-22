@@ -16,7 +16,8 @@ from helpers import Helpers
 
 app = Flask(__name__)
 celery = Celery(broker='redis://redis:6379/0', backend='redis://redis:6379/0')
-celery.conf.broker_transport_options = {"visibility_timeout": 3600 * 24 * 360} # 1h * 24 * 360 = 360d
+celery.conf.broker_transport_options = {
+    "visibility_timeout": 3600 * 24 * 360}  # 1h * 24 * 360 = 360d
 
 
 @celery.task(name='train.core', bind=True)
@@ -84,7 +85,7 @@ def train(self, core_id, config_data, start_date):
             algorithm.before_action(obs_n=obs_n)
 
             action_n = algorithm.take_action(obs_n=obs_n)
-            obs_old_n=copy.deepcopy(obs_n)
+            obs_old_n = copy.deepcopy(obs_n)
 
             algorithm.before_step(action_n=action_n)
             obs_n, reward_n, done, _ = env.step(action_n)
@@ -94,7 +95,6 @@ def train(self, core_id, config_data, start_date):
                 obs_n=obs_n,
                 done=done
             )
-
 
             Helpers.update_img_status(
                 env, cfg['video']['monitoring'], step_img_path, render_mode)
