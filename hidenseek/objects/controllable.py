@@ -400,11 +400,13 @@ class Player(pygame.sprite.Sprite):
                             for i in range(len(self.ray_points) - 1) if self.ray_points[i] != self.ray_points[i + 1]]
 
         # adds Agent Rectangle to Agent Ray Objects
+        speed_dist_w = self.speed + 1 + self.width / 2
+        speed_dist_h = self.speed + 1 + self.height / 2
         self.ray_objects.append([
-            Point((self.rect.topleft)),
-            Point((self.rect.topright)),
-            Point((self.rect.bottomright)),
-            Point((self.rect.bottomleft)),
+            Point((self.pos.x - speed_dist_w, self.pos.y - speed_dist_h)),
+            Point((self.pos.x + speed_dist_w, self.pos.y - speed_dist_h)),
+            Point((self.pos.x + speed_dist_w, self.pos.y + speed_dist_h)),
+            Point((self.pos.x - speed_dist_w, self.pos.y + speed_dist_h)),
         ])
 
     def update(self, new_action, local_env, logger):
