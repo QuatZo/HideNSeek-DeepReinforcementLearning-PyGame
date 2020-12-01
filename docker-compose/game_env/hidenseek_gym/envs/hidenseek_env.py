@@ -227,7 +227,7 @@ class HideNSeekEnv(gym.Env):
         elif action == 5:
             reward = self.default_cfg[agent_str]['rewards']['special']
 
-        return reward if success else reward * (-1)
+        return reward # if success else reward * (-1)
 
     def _perform_agent_action(self, agent, action, local_env):
         if action == 0:
@@ -247,6 +247,17 @@ class HideNSeekEnv(gym.Env):
             new_pos = agent.pos + Point((x, y))
 
             self._move_agent(agent, new_pos)
+
+            # outside game window
+            if (
+                new_pos.x < 0
+                or new_pos.x > self.width
+                or new_pos.y < 0
+                or new_pos.y > self.height
+            ):
+                self._move_agent(agent, old_pos)
+                return self._calc_action_reward(agent, action, success=False)
+
             for wall in local_env['walls']:
                 if Collision.aabb(new_pos, (agent.width, agent.height), wall.pos, (wall.width, wall.height)):
                     if Collision.sat(agent.get_abs_vertices(), wall.get_abs_vertices()):

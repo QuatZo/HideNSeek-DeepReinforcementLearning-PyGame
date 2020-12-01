@@ -78,8 +78,8 @@ seeker:
   graphics_path: graphics/people/policeman
   rewards:
     noop: -1
-    move: 1
-    rotate: 1
+    move: -1
+    rotate: -1
     special: 10
     win: 100
     lose: 100
@@ -91,9 +91,9 @@ hiding:
   walls_max: 5
   graphics_path: graphics/people/thief
   rewards:
-    noop: 0
-    move: 1
-    rotate: 1
+    noop: -1
+    move: -1
+    rotate: -1
     special: 5
     win: 100
     lose: 100
