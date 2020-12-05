@@ -285,7 +285,7 @@ class Helpers:
         }
 
     @staticmethod
-    def get_celery_success(core_id, time_elap, fps_batch, wins, ):
+    def get_celery_success(core_id, time_elap, fps_batch, wins, seeker_plot, hiding_plot  ):
         return {
             'core_id': core_id,
             'time_elapsed': time_elap,
@@ -295,4 +295,6 @@ class Helpers:
             'fps_median': round(statistics.median(fps_batch)),
             'fps_quantiles': [round(quantile) for quantile in statistics.quantiles(fps_batch)],
             'wins': wins,
+            'seeker_plot': seeker_plot,
+            'hiding_plot': hiding_plot,
         }
