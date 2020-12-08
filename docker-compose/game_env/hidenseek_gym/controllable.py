@@ -158,7 +158,8 @@ class Player(pygame.sprite.Sprite):
             Point((self.width * .15, self.height * .355)),
         ]
 
-        self.sprites = [pygame.image.load(os.path.join(cfg['graphics_path'], file_)) for file_ in os.listdir(cfg['graphics_path'])]
+        self.sprites = [pygame.image.load(os.path.join(
+            cfg['graphics_path'], file_)) for file_ in os.listdir(cfg['graphics_path'])]
 
         surface = pygame.Surface((self.width, self.height))
         surface.set_colorkey((0, 0, 0))
@@ -353,11 +354,13 @@ class Player(pygame.sprite.Sprite):
                             for i in range(len(self.ray_points) - 1) if self.ray_points[i] != self.ray_points[i + 1]]
 
         # adds Agent Rectangle to Agent Ray Objects
+        speed_dist_w = self.speed + 1 + self.width / 2
+        speed_dist_h = self.speed + 1 + self.height / 2
         self.ray_objects.append([
-            Point((self.rect.topleft)),
-            Point((self.rect.topright)),
-            Point((self.rect.bottomright)),
-            Point((self.rect.bottomleft)),
+            Point((self.pos.x - speed_dist_w, self.pos.y - speed_dist_h)),
+            Point((self.pos.x + speed_dist_w, self.pos.y - speed_dist_h)),
+            Point((self.pos.x + speed_dist_w, self.pos.y + speed_dist_h)),
+            Point((self.pos.x - speed_dist_w, self.pos.y + speed_dist_h)),
         ])
 
     def reset(self):
@@ -374,6 +377,7 @@ class Player(pygame.sprite.Sprite):
         self.image = surface
         self.rect = self.image.get_rect()
         self.rect.center = (self.pos.x, self.pos.y)
+
 
 class Hiding(Player):
     """

@@ -57,12 +57,12 @@ video:
   monitoring: yes
 
 game:
-  episodes: 100
+  episodes: 2000
   fps: 600
-  duration: 500
+  duration: 2000
   reverse: no
-  map: maps/map.bmp
-  continuous_reward: yes
+  map: maps/map3.bmp
+  continuous_reward: no
   graphics_path_wall: graphics/wall/game
   graphics_path_wall_owner: graphics/wall/ai
   algorithms:
@@ -74,26 +74,26 @@ game:
 seeker:
   speed_ratio: 5
   speed_rotate_ratio: 0.2
-  wall_action_timeout: 500
+  wall_action_timeout: 50
   graphics_path: graphics/people/policeman
   rewards:
     noop: -1
-    move: 1
-    rotate: 1
-    special: 10
+    move: -1
+    rotate: -1
+    special: -1
     win: 100
     lose: 100
 
 hiding:
   speed_ratio: 5
   speed_rotate_ratio: 0.2
-  wall_action_timeout: 5
+  wall_action_timeout: 50
   walls_max: 5
   graphics_path: graphics/people/thief
   rewards:
-    noop: 0
-    move: 1
-    rotate: 1
-    special: 5
+    noop: -1
+    move: -1
+    rotate: -1
+    special: -1
     win: 100
     lose: 100
