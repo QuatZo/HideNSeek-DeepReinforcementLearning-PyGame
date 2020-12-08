@@ -236,7 +236,7 @@ def train(self, core_id, config_data, start_date):
                     ((int(cfg['game']['duration']) - env.duration) / int(cfg['game']['duration'])) * 100, 2),
                 time_elap=round(time.time() - start),
                 eta=round((env.duration / env.clock.get_fps()) + int(cfg['game']['duration']) / env.clock.get_fps(
-                ) * (cfg['game']['episodes']) - i) if env.clock.get_fps() else None,
+                ) * (int(cfg['game']['episodes']) - i)) if env.clock.get_fps() else None,
                 img_path=step_img_path[8:],
                 rewards=rewards_ep,
                 wins=[sum(w) for w in wins_l],
