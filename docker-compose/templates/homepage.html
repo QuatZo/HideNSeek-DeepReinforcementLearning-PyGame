@@ -192,13 +192,28 @@
             .text(new Date(data.status.eta * 1000).toISOString().substr(11, 8));
           $(el)
             .find("#core-" + core_id + "-status-rewards")
-            .text(data.status.rewards);
+            .text(
+              "Seeker: " +
+                data.status.rewards[0] +
+                ", Hiding: " +
+                data.status.rewards[1]
+            );
           $(el)
             .find("#core-" + core_id + "-status-wins")
-            .text(data.status.wins);
+            .text(
+              "Seeker: " +
+                data.status.wins[0] +
+                ", Hiding: " +
+                data.status.wins[1]
+            );
           $(el)
             .find("#core-" + core_id + "-status-wins-moving")
-            .text(data.status.wins_moving);
+            .text(
+              "Seeker: " +
+                data.status.wins_moving[0] +
+                ", Hiding: " +
+                data.status.wins_moving[1]
+            );
 
           setTimeout(function () {
             get_task_status(task_id, core_id);
@@ -253,10 +268,22 @@
             .text(data.result.fps_median);
           $(el)
             .find("#core-" + core_id + "-fps-quantiles")
-            .text(data.result.fps_quantiles);
+            .html(
+              "25%: " +
+                data.result.fps_quantiles[0] +
+                "<br />50%: " +
+                data.result.fps_quantiles[1] +
+                "<br />75%: " +
+                data.result.fps_quantiles[2]
+            );
           $(el)
             .find("#core-" + core_id + "-wins")
-            .text(data.result.wins);
+            .text(
+              "Seeker: " +
+                data.result.wins[0] +
+                ", Hiding: " +
+                data.result.wins[1]
+            );
         } else {
           alert(data.state + ": " + data.status);
         }
