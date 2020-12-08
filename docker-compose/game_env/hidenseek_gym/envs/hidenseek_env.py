@@ -54,7 +54,7 @@ class HideNSeekEnv(gym.Env):
         self.p_hide_cfg = config['hiding']
         self.p_seek_cfg = config['seeker']
         self.agent_env = {}
-        self.action_space = spaces.Discrete(5)  # for both agents
+        self.action_space = spaces.Discrete(6)  # for both agents
         '''
         0 - NOOP 
         1 - FORWARD MOVEMENT
@@ -227,7 +227,7 @@ class HideNSeekEnv(gym.Env):
         elif action == 5:
             reward = self.default_cfg[agent_str]['rewards']['special']
 
-        return reward # if success else reward * (-1)
+        return reward
 
     def _perform_agent_action(self, agent, action, local_env):
         if action == 0:
@@ -443,6 +443,11 @@ class HideNSeekEnv(gym.Env):
             enemy_v = [(v.x, v.y)
                        for v in local_env['enemy'].get_abs_vertices()]
             _ = pygame.draw.polygon(surf_temp, (127, 127, 127), enemy_v)
+
+        if 'walls' in local_env and local_env['walls']:
+            for wall in local_env['walls']:
+                wall_v = [(w.x, w.y) for w in wall.get_abs_vertices()]
+                _ = pygame.draw.polygon(surf_temp, (191, 191, 191), wall_v)
 
         return np.fliplr(np.rot90(pygame.surfarray.pixels_red(surf_temp).astype(np.uint8), 3)) / 255.0
 

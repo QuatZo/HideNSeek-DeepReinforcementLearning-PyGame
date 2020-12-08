@@ -74,7 +74,7 @@ game:
 seeker:
   speed_ratio: 5
   speed_rotate_ratio: 0.2
-  wall_action_timeout: 0
+  wall_action_timeout: 50
   graphics_path: graphics/people/policeman
   rewards:
     noop: -1
@@ -87,8 +87,8 @@ seeker:
 hiding:
   speed_ratio: 5
   speed_rotate_ratio: 0.2
-  wall_action_timeout: 0
-  walls_max: 0
+  wall_action_timeout: 50
+  walls_max: 5
   graphics_path: graphics/people/thief
   rewards:
     noop: -1
