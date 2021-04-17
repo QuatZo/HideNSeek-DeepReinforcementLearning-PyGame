@@ -28,10 +28,10 @@ This is an awesome archive showing the work progress of this project. Sadly it d
 
 ### Authors
 
-[IceDice / Hubert Lechowicz](https://github.com/HubertLechowicz)
+[IceDice](https://github.com/HubertLechowicz)
 
-[QuatZo / Dawid Mrosek](https://github.com/QuatZo)
+[QuatZo](https://github.com/QuatZo)
 
-[Woocashowski / Łukasz Płaneta](https://github.com/woocashowski)
+[Woocashowski](https://github.com/woocashowski)
 
 Made as a Bachelor Project while studying at Silesian University of Technology, Gliwice, Poland
